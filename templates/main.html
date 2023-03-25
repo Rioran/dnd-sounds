@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  {% block title %}Sounds panel{% endblock %}
+{% endblock %}
+
+{% block content %}
+  <div class="container-xxl my-md-4 bd-layout">
+    <table class="table col-4">
+      <tr class="table-success">
+        <th class="col-2">track</th>
+        <th class="col-2">controls</th>
+      </tr>
+      {% for item in items %}
+      <tr>
+        <td>{{ item }}</td>
+        <td><audio controls>
+          <source src="{{ url_for('track_files', filename=item) }}">
+        </audio></td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+{% endblock content %}
