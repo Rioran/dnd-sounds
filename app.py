@@ -19,13 +19,24 @@ def get_tracks():
 def get_subfolders_files(tracks_folder: str) -> dict:
     result = {}
     path = Path(tracks_folder)
+
+    if not path.exists():
+        return result
+
     for subfolder in path.iterdir():
-        if subfolder.is_dir():
-            files = []
-            for file in subfolder.iterdir():
-                if file.is_file():
-                    files.append(file.name)
-            result[subfolder.name] = files
+        if not subfolder.is_dir():
+            continue
+
+        files = []
+
+        for file in subfolder.iterdir():
+            if not file.is_file():
+                continue
+
+            files.append(file.name)
+
+        result[subfolder.name] = files
+
     return result
 
 
@@ -38,3 +49,4 @@ def track_files(filename):
 def main():
     items = get_tracks()
     return render_template('main.html', items=items)
+ 
