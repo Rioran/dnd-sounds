@@ -16,9 +16,9 @@ def get_tracks():
     return tracks
 
 
-def get_subfolders_files(TRACKS_FOLDER: str) -> dict:
+def get_subfolders_files(tracks_folder: str) -> dict:
     result = {}
-    path = Path(TRACKS_FOLDER)
+    path = Path(tracks_folder)
     for subfolder in path.iterdir():
         if subfolder.is_dir():
             files = []
@@ -27,6 +27,7 @@ def get_subfolders_files(TRACKS_FOLDER: str) -> dict:
                     files.append(file.name)
             result[subfolder.name] = files
     return result
+
 
 @app.route('/tracks/<path:filename>')
 def track_files(filename):
