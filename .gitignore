@@ -1,3 +1,6 @@
+# To modify tracks locally - huge file weight
+tracks/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
