@@ -3,16 +3,17 @@ from pathlib import Path
 from flask import Flask, render_template, send_from_directory
 
 
-TRACKS_FOLDER = Path(__file__).parent.resolve() / 'tracks'
+MAIN_FOLDER = Path(__file__).parent.resolve()
 app = Flask(__name__)
 
 
 def get_tracks():
-    folder_objects = TRACKS_FOLDER.glob('**/*.*')
+    folder_objects = (MAIN_FOLDER / 'tracks').glob('**/*.*')
     tracks = [
-        str(item).split('\\')[-1]
+        'tracks//' + str(item).split('\\')[-1]
         for item in folder_objects
     ]
+    print(f'tracks: {tracks}')
     return tracks
 
 
@@ -33,9 +34,10 @@ def get_subfolders_files(tracks_folder: str) -> dict:
     return result
 
 
-@app.route('/tracks/<path:filename>')
-def track_files(filename):
-    return send_from_directory(TRACKS_FOLDER, filename)
+@app.route('/<path:filename>')
+def local_files(filename):
+    print(f'file request: {filename}')
+    return send_from_directory(MAIN_FOLDER, filename)
 
 
 @app.route('/')

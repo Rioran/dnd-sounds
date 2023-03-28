@@ -1,0 +1,23 @@
+
+
+audio {
+   box-sizing: border-box;
+   width: 100%;
+}
+
+.scrolling-wrapper {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    transform: rotateX(180deg);
+}
+
+.card {
+    flex: 0 0 auto;
+    transform: rotateX(180deg);
+};
+
+.table {
+    table-layout: fixed;
+    width: 100%;
+}

@@ -7,3 +7,9 @@ http://127.0.0.1:5000/ Ensure that Flask is installed and use:
 ```Linux Kernel Module
 flask --app app run
 ```
+
+## run with changes auto-detection
+
+```Linux Kernel Module
+flask --app app run --debug
+```
