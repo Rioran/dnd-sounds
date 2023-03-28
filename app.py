@@ -7,16 +7,6 @@ MAIN_FOLDER = Path(__file__).parent.resolve()
 app = Flask(__name__)
 
 
-def get_tracks():
-    folder_objects = (MAIN_FOLDER / 'tracks').glob('**/*.*')
-    tracks = [
-        'tracks//' + str(item).split('\\')[-1]
-        for item in folder_objects
-    ]
-    print(f'tracks: {tracks}')
-    return tracks
-
-
 def get_subfolders_files(tracks_folder: str) -> dict:
     result = {}
     path = Path(tracks_folder)
@@ -34,14 +24,17 @@ def get_subfolders_files(tracks_folder: str) -> dict:
     return result
 
 
-@app.route('/<path:filename>')
-def local_files(filename):
-    print(f'file request: {filename}')
-    return send_from_directory(MAIN_FOLDER, filename)
+@app.route('/<path:folder>/<path:filename>')
+def local_files(filename, folder = None):
+    target_folder = MAIN_FOLDER
+    file = filename
+    if folder:
+        target_folder /= folder
+    return send_from_directory(target_folder, file)
 
 
 @app.route('/')
 def main():
-    items = get_tracks()
+    items = get_subfolders_files(MAIN_FOLDER / 'tracks')
     return render_template('main.html', items=items)
  

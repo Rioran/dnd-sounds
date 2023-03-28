@@ -1,8 +1,10 @@
-
-
 audio {
    box-sizing: border-box;
    width: 100%;
+}
+
+td.col.card {
+    min-width: 300px;
 }
 
 .scrolling-wrapper {
@@ -13,7 +15,7 @@ audio {
 }
 
 .card {
-    flex: 0 0 auto;
+    flex: 0 1 300px;
     transform: rotateX(180deg);
 };
 

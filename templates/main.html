@@ -8,17 +8,17 @@
   <div class="container-fluid my-md-4 bd-layout">
     <table class="row text-center scroll-table table-borderless">
     <tr class="scrolling-wrapper">
-      {% for i in range(10) %}
-        <td class="col-2 card">
+      {% for folder, tracks in items.items() %}
+        <td class="col card">
           <table class="table table-borderless">
             <tr class="table-success">
-              <th>track {{ i }}</th>
+              <th>{{ folder }}</th>
             </tr>
-            {% for item in items %}
+            {% for track in tracks %}
             <tr>
-              <td><p>{{ item }}</p>
+              <td><p>{{ track }}</p>
                 <audio controls>
-                  <source src="{{ url_for('local_files', filename=item) }}">
+                  <source src="{{ url_for('local_files', folder='tracks\\'+folder, filename=track) }}">
                 </audio>
               </td>
             </tr>
