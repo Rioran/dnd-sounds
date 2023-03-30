@@ -25,7 +25,7 @@ def get_subfolders_files(tracks_folder: str) -> dict:
 
 
 @app.route('/<path:folder>/<path:filename>')
-def local_files(filename, folder = None):
+def local_files(filename, folder=None):
     target_folder = MAIN_FOLDER
     file = filename
     if folder:
@@ -37,4 +37,3 @@ def local_files(filename, folder = None):
 def main():
     items = get_subfolders_files(MAIN_FOLDER / 'tracks')
     return render_template('main.html', items=items)
- 
